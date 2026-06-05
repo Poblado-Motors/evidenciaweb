@@ -63,4 +63,34 @@ function eliminar(){
 
 }
 
+// funcion editar del controlador
+function editar(){
+    $id_cliente = $_REQUEST['id_cliente'];
+    $cliente = $_REQUEST['cliente'];
+    $vehiculo = $_REQUEST['vehiculo'];
+    $placa = $_REQUEST['placa'];
+    $correo = $_REQUEST['correo'];
+    $telefono = $_REQUEST['telefono'];
+
+    // poner fecha actual
+    date_default_timezone_set('America/Bogota');
+    $fechaActual = date("Y-m-d");
+
+    // instanciamos la clase clientes del modelo
+    $cliente = new Clientes($id_cliente,$cliente,$vehiculo,$placa,$correo,$telefono,$fechaActual);
+    $row = $cliente->editar();
+
+    // validamos si la funcion guadar es exitosa 
+    if($row){
+        echo '<script>alert("exitoso");
+        window.location = "../clientes.php";
+        </script>';
+    }else{
+        echo '<script>alert("Error intentelo de nuevo");
+        window.location = "../clientes.php";
+        </script>';
+    }
+
+}
+
 ?>

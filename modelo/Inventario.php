@@ -128,16 +128,16 @@ class Inventario{
         $conexion = $con->conectar();
 
         // sentencia sql
-        $sql = $conexion->prepare("UPDATE inventario SET cliente=:cliente,vehiculo=:vehiculo,servicio=:servicio,prioridad=:prioridad,descripcion=:descripcion,estado=:estado,costo=:costo WHERE id_orden=:id_orden");
-        $sql->bindParam(':id_orden', $this->id_orden);
-        $sql->bindParam(':cliente', $this->cliente);
-        $sql->bindParam(':vehiculo', $this->vehiculo);
-        $sql->bindParam(':servicio', $this->servicio);
-        $sql->bindParam(':prioridad', $this->prioridad);
-        $sql->bindParam(':descripcion', $this->descripcion);
+        $sql = $conexion->prepare("UPDATE inventario SET producto=:producto,categoria=:categoria,stock=:stock,stock_min=:stock_min,precio=:precio,estado=:estado WHERE codigo=:codigo");
+        $sql->bindParam(':codigo', $this->codigo);
+        $sql->bindParam(':producto', $this->producto);
+        $sql->bindParam(':categoria', $this->categoria);
+        $sql->bindParam(':stock', $this->stock);
+        $sql->bindParam(':stock_min', $this->stock_min);
+        $sql->bindParam(':precio', $this->precio);
         $sql->bindParam(':estado', $this->estado);
-        $sql->bindParam(':costo', $this->costo);
-        $sql->execute();
+        $resp = $sql->execute();
+        return $resp;
     }
 
 

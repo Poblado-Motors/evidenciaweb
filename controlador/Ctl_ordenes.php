@@ -61,4 +61,33 @@ function eliminar(){
 
 }
 
+function editar(){
+    $id_orden = $_REQUEST['id_orden'];
+    $cliente = $_REQUEST['cliente'];
+    $vehiculo = $_REQUEST['vehiculo'];
+    $servicio = $_REQUEST['servicio'];
+    $prioridad = $_REQUEST['prioridad'];
+    $descripcion = $_REQUEST['descripcion'];
+    $estado = 1;
+    $costo = $_REQUEST['costo'];
+
+    // instanciamos la clase clientes del modelo
+    $ordenes = new Ordenes($id_orden,$cliente,$vehiculo,$servicio,$prioridad,$descripcion,$estado,$costo);
+    $row = $ordenes->editar();
+
+    // validamos si la funcion guadar es exitosa 
+    if($row){
+       
+        echo '<script>alert("Error intentelo de nuevo");
+        window.location = "../ordenes.php";
+        </script>';
+    }else{
+         echo '<script>alert("exitoso");
+        window.location = "../ordenes.php";
+        </script>';
+    }
+    // print_r($_REQUEST);
+
+}
+
 ?>

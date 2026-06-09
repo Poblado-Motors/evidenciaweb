@@ -81,6 +81,7 @@ $row = $ordenes->mostrar();
                                 <td><?php echo '$'. number_format($i['costo']) ?></td>
                                 <td>
                                     <a href="controlador/Ctl_ordenes.php?id_orden=<?php echo $i['id_orden'] ?>&operacion=Eliminar" class="text-danger"><i class="fas fa-trash"></i></a>
+                                    <a class="filter-tab active" type="button" data-bs-toggle="modal" data-bs-target="#orden<?php echo $i['id_orden'] ?>" data-bs-whatever="@getbootstrap"><i class="fas fa-pen"></i> Editar</a>
                                 </td>
                             </tr>
                         <?php } ?>
@@ -182,6 +183,56 @@ $row = $ordenes->mostrar();
     </div>
   </div>
 </div>
+
+
+<?php foreach($row as $i){ ?>
+ <!-- modal -->
+     <div class="modal fade" id="orden<?php echo $i['id_orden'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Editar Orden</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="controlador/Ctl_ordenes.php" method="POST">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="text-dark">Nombre Cliente</label>
+                        <input type="hidden" name="id_orden" class="border border-dark" required value="<?php echo $i['id_orden'] ?>">
+                        <input type="text" name="cliente" class="border border-dark" required value="<?php echo $i['cliente'] ?>">
+                    </div>
+                    <div class="form-group">
+                        <label class="text-dark">Vehiculo</label>
+                        <input type="text" name="vehiculo" class="border border-dark" required value="<?php echo $i['vehiculo'] ?>">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="text-dark">Servicio</label>
+                    <input type="text" name="servicio" class="border border-dark" required value="<?php echo $i['servicio'] ?>">
+                </div>
+                <div class="form-group">
+                    <label class="text-dark">Prioridad</label>
+                    <input type="text" name="prioridad" class="border border-dark" required value="<?php echo $i['prioridad'] ?>">
+                </div>
+                <div class="form-group">
+                    <label class="text-dark">Descripcion</label>
+                    <textarea name="descripcion" class="border border-dark" required><?php echo $i['descripcion'] ?></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="text-dark">Costo</label>
+                    <input type="text" name="costo" class="border border-dark" required value="<?php echo $i['costo'] ?>">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary">Cancelar</button>
+                <button class="btn btn-primary" name="operacion" value="Editar">Editar Orden</button>
+            </div>
+        </form>
+    </div>
+  </div>
+</div>
+<?php } ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     <script src="js/script.js"></script>
